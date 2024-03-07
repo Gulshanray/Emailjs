@@ -1,0 +1,106 @@
+<style>
+ body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#button:hover {
+  background-color: #45a049;
+}
+ 
+</style>
+<form id="form">
+    <div class="field">
+      <label for="from_name">From_Name</label>
+      <input type="text" name="from_name" id="from_name">
+    </div>
+    <div class="field">
+      <label for="to_name">To_Name </label>
+      <input type="text" name="to_name" id="to_name">
+    </div>
+    <div class="field">
+      <label for="message">Message</label>
+      <input type="text" name="message" id="message">
+    </div>
+    <div class="field">
+      <label for="form_name">From_Name</label>
+      <input type="text" name="form_name" id="form_name">
+    </div>
+    <div class="field">
+      <label for="reply_to">Reply_To</label>
+      <input type="text" name="reply_to" id="reply_to">
+    </div>
+  
+    <input type="submit" id="button" value="Send Email" >
+  </form>
+  
+  <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  
+  <script type="text/javascript">
+    emailjs.init('Px5-FMnZrFDINPx0Q')
+    const btn = document.getElementById('button');
+
+document.getElementById('form')
+ .addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   btn.value = 'Sending...';
+
+   const serviceID = 'default_service';
+   const templateID = 'template_3htzbns';
+
+   emailjs.sendForm(serviceID, templateID, this)
+    .then(() => {
+      btn.value = 'Send Email';
+      alert('Sent!');
+    }, (err) => {
+      btn.value = 'Send Email';
+      alert(JSON.stringify(err));
+    });
+});
+  </script>
+  
